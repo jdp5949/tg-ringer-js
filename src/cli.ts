@@ -6,6 +6,7 @@
  *   tg-ringer call  TARGET [secs]  ring a user/number, then hang up
  *   tg-ringer msg   TARGET TEXT    send a direct message
  *   tg-ringer whoami               show the logged-in account
+  tg-ringer status               check anti-spam status via @SpamBot
  *   tg-ringer config               show current config (api_hash masked)
  *   tg-ringer init                 (re)configure credentials
  */
@@ -146,6 +147,7 @@ function usage(): void {
   tg-ringer call  TARGET [secs]  ring a user/number, then hang up
   tg-ringer msg   TARGET TEXT    send a direct message
   tg-ringer whoami               show the logged-in account
+  tg-ringer status               check anti-spam status via @SpamBot
   tg-ringer config               show current config
   tg-ringer init                 (re)configure credentials
 
@@ -188,6 +190,13 @@ async function main(): Promise<void> {
       await withRinger(async (r) => {
         const me = await r.whoami();
         console.log(`${me.firstName} (id ${me.id}, @${me.username})`);
+      });
+      break;
+    case "status":
+      await withRinger(async (r) => {
+        console.log("asking @SpamBot ...");
+        console.log("---");
+        console.log(await r.spamStatus());
       });
       break;
     default:
