@@ -1,0 +1,28 @@
+name: Release
+
+# Build the package tarball and attach it to the GitHub Release on a v* tag.
+# Install from the release with:  npm install <tarball-url>
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install --no-audit --no-fund
+      - run: npm run build
+      - name: Pack tarball
+        run: npm pack
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "*.tgz"
+          generate_release_notes: true

@@ -1,0 +1,49 @@
+{
+  "name": "tg-ringer",
+  "version": "0.1.0",
+  "description": "Ring (call) and message any Telegram user from your own account (userbot). Urgent alerts via a real Telegram call.",
+  "license": "MIT",
+  "author": "jdp5949",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "tg-ringer": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "lint": "tsc -p tsconfig.json --noEmit"
+  },
+  "keywords": [
+    "telegram",
+    "call",
+    "ring",
+    "alert",
+    "notification",
+    "userbot",
+    "mtproto",
+    "gramjs"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "big-integer": "^1.6.51",
+    "telegram": "^2.22.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdp5949/tg-ringer-js.git"
+  },
+  "homepage": "https://github.com/jdp5949/tg-ringer-js#readme"
+}
