@@ -134,4 +134,12 @@ export class TgRinger {
   async whoami(): Promise<Api.User> {
     return (await this.client.getMe()) as Api.User;
   }
+
+  /** Ask @SpamBot for this account's anti-spam status; return its reply. */
+  async spamStatus(): Promise<string> {
+    await this.client.sendMessage("SpamBot", { message: "/start" });
+    await new Promise((r) => setTimeout(r, 3000));
+    const msgs = await this.client.getMessages("SpamBot", { limit: 1 });
+    return msgs[0]?.message || "(no reply yet — try again in a moment)";
+  }
 }
